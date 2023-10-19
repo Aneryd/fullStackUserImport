@@ -1,0 +1,32 @@
+version: '1'
+services:
+  nginx:
+    build: 
+      context: .
+      dockerfile: docker/Nginx.Dockerfile
+    image: nginx:alpine
+    ports:
+      - 8080:80
+    depends_on:
+      - fpm
+    volumes:
+      - ./:/var/www/laravel
+  fpm: 
+    build: 
+      context: .
+      dockerfile: docker/Fpm.Dockerfile
+    ports:
+      - 9000:9000
+    volumes:
+      - ./:/var/www/laravel
+    working_dir: /var/www/laravel
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: full_stack_user_import
+      MYSQL_ROOT_PASSWORD: password
+      
