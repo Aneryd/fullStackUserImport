@@ -18,7 +18,7 @@ docker-compose up -d
 
 Далее нужно, зайти в контейнер с fpm-php и выполнить миграцию и обновить файлы composer:
 ```sh
-docker exec -it orderdealers-fpm-1 bash
-php artisan migrate:refresh
+docker exec -it fullstackuserimport-fpm-1 bash
 composer update
+php artisan migrate:refresh
 ```
